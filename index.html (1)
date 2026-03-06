@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПО-24-2 қыздарына шақыру</title>
+<style>
+body {
+        margin: 0;
+            font-family: 'Arial', sans-serif;
+                background: linear-gradient(to bottom, #ffe6f0, #fff);
+                    overflow-x: hidden;
+                        text-align: center;
+                            position: relative;
+}
+
+h1 {
+        margin-top: 50px;
+            color: #d6336c;
+                font-size: 2.5rem;
+                    text-shadow: 2px 2px #ffb6c1;
+}
+
+#timer {
+        font-size: 2rem;
+            margin: 20px 0;
+                color: #8e2a63;
+                    font-weight: bold;
+}
+
+/* Сыйлық */
+#gift {
+        width: 180px;
+            margin: 20px auto;
+                cursor: pointer;
+                    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+        from { filter: drop-shadow(0 0 5px #ff99cc); transform: scale(1); }
+            to { filter: drop-shadow(0 0 25px #ff33aa); transform: scale(1.1); }
+}
+
+/* Гүлдер */
+.flower {
+        position: absolute;
+            top: -50px;
+                font-size: 2rem;
+                    animation: fall linear infinite;
+}
+
+@keyframes fall {
+        0% { top: -50px; transform: rotate(0deg); opacity: 1; }
+            100% { top: 100vh; transform: rotate(360deg); opacity: 0; }
+}
+
+/* Батырма */
+button {
+        padding: 15px 30px;
+            font-size: 1.2rem;
+                color: white;
+                    background-color: #d6336c;
+                        border: none;
+                            border-radius: 10px;
+                                cursor: pointer;
+                                    transition: 0.3s;
+                                        margin-top: 10px;
+}
+
+button:hover {
+        background-color: #ff66aa;
+}
+
+@media (max-width: 600px) {
+        h1 { font-size: 2rem; }
+            #timer { font-size: 1.5rem; }
+                #gift { width: 140px; }
+}
+</style>
+</head>
+<body>
+
+<h1>ПО-24-2 қыздарына 8 наурыз құттықтау! 🎉</h1>
+
+<div id="timer"></div>
+
+<img id="gift" src="https://cdn-icons-png.flaticon.com/512/2910/2910764.png" alt="Сыйлық ашу">
+
+<br>
+<button id="sendGift">Сыйлық жіберу</button>
+
+<audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
+
+<script>
+// Таймер
+function countdown() {
+        const targetDate = new Date("March 7, 2026 16:00:00").getTime();
+            const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                    if (distance < 0) {
+                                document.getElementById("timer").innerHTML = "Құттықтаймыз! 🎉";
+                                        return;
+                    }
+
+                        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+                            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+                                const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+                                    document.getElementById("timer").innerHTML = `${hours} сағ ${minutes} мин ${seconds} с`;
+}
+setInterval(countdown, 1000);
+
+// Гүлдер жасау
+const colors = ["🌸","🌹","💐","🌺","🌷"];
+for(let i=0; i<25; i++){
+        const flower = document.createElement("div");
+            flower.className = "flower";
+                flower.style.left = Math.random()*100 + "vw";
+                    flower.style.animationDuration = (3 + Math.random()*5) + "s";
+                        flower.innerText = colors[Math.floor(Math.random()*colors.length)];
+                            document.body.appendChild(flower);
+}
+
+// Сыйлықты басқанда анимация
+document.getElementById("gift").addEventListener("click", () => {
+        const gift = document.getElementById("gift");
+            gift.style.transform = "scale(1.5)";
+                setTimeout(() => gift.style.transform = "scale(1)", 500);
+                    alert("Сыйлық ашылды! 🌟");
+});
+
+// Батырманы басқанда қуанышты хабарлама
+document.getElementById("sendGift").addEventListener("click", () => {
+        alert("Сенің жібергенің: ❤️ Сүйіспеншілікпен! ❤️");
+});
+</script>
+
+</body>
+</html>
